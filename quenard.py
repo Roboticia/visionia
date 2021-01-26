@@ -7,7 +7,10 @@ Created on Wed Oct 14 18:52:54 2020
 import cv2
 from utils import ArducamUtils
 import subprocess
+import sys
 import time
+
+nb_img = sys.argv[0]
 
 def show_info(arducam_utils):
     _, firmware_version = arducam_utils.read_dev(ArducamUtils.FIRMWARE_VERSION_REG)
