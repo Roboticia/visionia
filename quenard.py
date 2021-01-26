@@ -62,7 +62,7 @@ for index,frame in enumerate(list_frame):
 #    frame = resize(frame, 1280.0)
 
 # creation de l'image et de son appellation
-    cv2.imwrite('test'+str(index)+'.jpg',frame)
+    cv2.imwrite('../test_img/test'+str(index)+'.jpg',frame)
 
 # soulage
 cap.release()
