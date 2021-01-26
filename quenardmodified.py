@@ -26,15 +26,14 @@ def resize(frame, dst_width):
 
 
 
-cmd1 = 'v4l2-ctl -d 0 -c exposure=60'
+cmd1 = 'v4l2-ctl -d 0 -c exposure=160'
 cmd2 = 'v4l2-ctl -d 0 -C exposure'
 cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
 arducam_utils = ArducamUtils(0)
 cap.set(cv2.CAP_PROP_CONVERT_RGB, arducam_utils.convert2rgb)
 show_info(arducam_utils)
 
-#retframe=cap.read
-#grab
+
 
 # Aquisition des dimentions de l'image en provenance du capteur
 w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
@@ -52,9 +51,17 @@ for i in range(6):
     ret, frame = cap.read()
 
 # loop to process the image at  manual exposure
-for i in range(10): # Nombre d'images
+for i in range(200): # Nombre d'images
+    for j in range (10):
+        cap.grab()
     ret, frame = cap.read()
     list_frame.append(frame)
+
+#retframe=cap.read
+#grab
+
+
+
 
 for index,frame in enumerate(list_frame):
     frame = frame.reshape(int(h), int(w))
