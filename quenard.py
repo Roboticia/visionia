@@ -54,6 +54,8 @@ for i in range(6):
 
 # loop to process the image at  manual exposure
 for i in range(nb_img):  # Nombre d'images
+    if i%10:
+        print(i)
     ret, frame = cap.read()
     list_frame.append(frame)
 
