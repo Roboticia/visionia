@@ -44,9 +44,7 @@ w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 
 
-
-
-list_frame=[]
+list_frame = []
 
 
 # needed to purge the frame with default exposure
