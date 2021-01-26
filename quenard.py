@@ -10,7 +10,7 @@ import subprocess
 import sys
 import time
 
-nb_img = int(sys.argv[0])
+nb_img = int(sys.argv[1])
 
 def show_info(arducam_utils):
     _, firmware_version = arducam_utils.read_dev(ArducamUtils.FIRMWARE_VERSION_REG)
