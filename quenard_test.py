@@ -7,10 +7,7 @@ Created on Wed Oct 14 18:52:54 2020
 import cv2
 from utils import ArducamUtils
 import subprocess
-import sys
 import time
-
-nb_img = int(sys.argv[1])
 
 def show_info(arducam_utils):
     _, firmware_version = arducam_utils.read_dev(ArducamUtils.FIRMWARE_VERSION_REG)
@@ -29,22 +26,23 @@ def resize(frame, dst_width):
 
 
 
-cmd1 = 'v4l2-ctl -d 0 -c exposure=60'
+cmd1 = 'v4l2-ctl -d 0 -c exposure=400'
 cmd2 = 'v4l2-ctl -d 0 -C exposure'
 cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
 arducam_utils = ArducamUtils(0)
 cap.set(cv2.CAP_PROP_CONVERT_RGB, arducam_utils.convert2rgb)
 show_info(arducam_utils)
 
-#retframe=cap.read
-#grab
+
 
 # Aquisition des dimentions de l'image en provenance du capteur
 w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 
 
-list_frame = []
+
+
+list_frame=[]
 
 
 # needed to purge the frame with default exposure
@@ -53,9 +51,7 @@ for i in range(6):
     ret, frame = cap.read()
 
 # loop to process the image at  manual exposure
-for i in range(nb_img):  # Nombre d'images
-    if i%10 == 0:
-        print(i)
+for i in range(150): # Nombre d'images
     ret, frame = cap.read()
     list_frame.append(frame)
 
@@ -65,9 +61,8 @@ for index,frame in enumerate(list_frame):
 #    frame = resize(frame, 1280.0)
 
 # creation de l'image et de son appellation
-    cv2.imwrite('../test_img/test'+str(index)+'.jpg',frame)
+    cv2.imwrite('test'+str(index)+'.jpg',frame)
 
 # soulage
 cap.release()
-
 
