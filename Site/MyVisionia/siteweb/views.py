@@ -1,17 +1,14 @@
 #les vues de l'affichage
-import jinja2
 import aiohttp_jinja2
 from aiohttp import web
 
-@aiohttp_jinja2.template('tmpl.jinja2')
-def handler(request):
-    return {'name': 'Andrew', 'surname': 'Svetlov'}
+@aiohttp_jinja2.template('htmldetest.html')
+def accueil(request):
+    name = request.rel_url.query.get('name', '')
+    return {'name': name, 'surname': 'Svetlov'}
 
 
 
-async def accueil(request):
-    content = open("templates/htmldetest.html", "r").read()
-    return web.Response(content_type="text/html", text=content)
 async def logo(request):
     content = open("templates/logo.html", "r").read()
     return web.Response(content_type="text/html", text=content)
