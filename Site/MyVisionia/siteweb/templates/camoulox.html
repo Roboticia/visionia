@@ -1,0 +1,18 @@
+<!-- index.html -->
+{% extends "layout.html" %}
+{% set title = "Main" %}
+{% block body %}
+
+    <h2>Form test extended from layout.html</h2>
+
+    <form method="POST" action="{{ url('index') }}">
+        <input type="text" name="name" id="name"/>
+        <input type="submit">
+    </form>
+
+    {% if name %}
+
+        <p>My name is {{ name }}</p>
+
+    {% endif %}
+{% endblock %}

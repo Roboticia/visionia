@@ -1,6 +1,6 @@
 #Les chemins
 
-from views import accueil, logo, parametrage, options, camera
+from views import accueil, logo, parametrage, options, camera, index, javascript, offer
 
 
 def setup_routes(app):
@@ -10,5 +10,7 @@ def setup_routes(app):
     app.router.add_get('/parametrage', parametrage)
     app.router.add_get('/visualisation', camera)
     app.router.add_static('/stockage', 'templates/LEdossier')
-
+    app.router.add_get("/video", index)
+    app.router.add_get("/client.js", javascript)
+    app.router.add_post("/offer", offer)
     
