@@ -3,6 +3,8 @@ Factory camera
 
 <h1><h1>
 <h2>Installation</h2>
+  Les drivers sont à monter hors du docker
+https://www.arducam.com/docs/camera-for-jetson-nano/mipi-camera-modules-for-jetson-nano/driver-installation/
   
 <p>  
 On installe quelques bibliothèques de manière classique et update pip.
