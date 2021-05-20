@@ -21,3 +21,6 @@ Cependant il n'est pas possible de faire cela dans un dockerfile à cause d'un a
   Nota : docker image visionia:0
   
 </p>
+```sh  
+  pip install aiortc
+```
