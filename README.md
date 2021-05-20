@@ -26,6 +26,9 @@ Cependant il n'est pas possible de faire cela dans un dockerfile à cause d'un a
 
 ```sh  
   pip install aiortc
+  pip install aiohttp
+  pip install aiohttp-jinja2
+  pip install v4l2
 ```
 <p>
   
