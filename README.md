@@ -3,6 +3,7 @@ Factory camera
 
 <h1><h1>
 <h2>Installation</h2>
+  
 <p>  
 On installe quelques bibliothèques de manière classique et update pip.
   
@@ -17,10 +18,15 @@ Cependant il n'est pas possible de faire cela dans un dockerfile à cause d'un a
 ```sh
   /usr/src/jetson_multimedia_api/samples/common/classes/NvBuffer.cpp
 ```
+</p>
 <p> 
   Nota : docker image visionia:0
   
 </p>
+
 ```sh  
   pip install aiortc
 ```
+<p>
+  
+</p> 
