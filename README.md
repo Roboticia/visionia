@@ -25,7 +25,16 @@ Cependant il n'est pas possible de faire cela dans un dockerfile à cause d'un a
   Nota : docker image visionia:0
   
 </p>
-
+  
+  ```sh
+  docker run -it --name visionia --runtime nvidia --rm --net host -v /home/nnvision:/home/ju -v /dev/video0 -v /usr/src/jetson_multimedia_api:/usr/src/jetson_multimedia_api visionia:0 bash
+  ```
+  
+<p>
+  Poursuivons l'installation :
+</p>
+  
+  
 ```sh  
   pip install aiortc
   pip install aiohttp
@@ -35,9 +44,23 @@ Cependant il n'est pas possible de faire cela dans un dockerfile à cause d'un a
 <p>
   V4L2 fourni certains fichiers quelques peu datés, qussi nous faut il passer de Python 2.x à Python 3.x deux lignes du fichier : 
 </p> 
-```
+  
+```sh
   /usr/local/lib/python3.6/dist-packages/v4l2.py
 ```
   
-  197 line: “) = range (1, 9) + [0x80]”  ==>  “) = list (range (1, 9)) + [0x80]”
-248 line: “) = range (0, 4) + [2]” ==> “) = list (range (0, 4)) + [2] “
+  <p>
+ Ligne 197 : 
+  </p>
+    
+  ```py
+  range (1, 9) + [0x80]        -------->           list (range (1, 9)) + [0x80]
+  ```
+  
+  <p>
+Ligne 248 :
+  </p>
+  
+  ```py
+  range (0, 4) + [2]        -------->           list (range (0, 4)) + [2] “
+  ```
