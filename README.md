@@ -33,5 +33,11 @@ Cependant il n'est pas possible de faire cela dans un dockerfile à cause d'un a
   pip install v4l2
 ```
 <p>
-  
+  V4L2 fourni certains fichiers quelques peu datés, qussi nous faut il passer de Python 2.x à Python 3.x deux lignes du fichier : 
 </p> 
+```
+  /usr/local/lib/python3.6/dist-packages/v4l2.py
+```
+  
+  197 line: “) = range (1, 9) + [0x80]”  ==>  “) = list (range (1, 9)) + [0x80]”
+248 line: “) = range (0, 4) + [2]” ==> “) = list (range (0, 4)) + [2] “
