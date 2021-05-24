@@ -74,3 +74,8 @@ Ligne 248 :
   ```py
   range (0, 4) + [2]        -------->           list (range (0, 4)) + [2]
   ```
+  
+<p> 
+  Nota : docker image visionia:0.2
+  
+</p>
