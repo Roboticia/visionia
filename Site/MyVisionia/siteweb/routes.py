@@ -1,6 +1,6 @@
 #Les chemins
 
-from views import accueil, logo, parametrage, options, camera, index, javascript, offer
+from views import accueil, logo, parametrage, options, television, index, javascript, offer
 
 
 def setup_routes(app):
