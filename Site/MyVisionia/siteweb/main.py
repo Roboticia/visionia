@@ -2,9 +2,12 @@
 
 import logging
 from aiohttp import web
-from routes import setup_routes
+import os
 import aiohttp_jinja2
 import jinja2
+import cv2
+from utils import ArducamUtils
+import subprocess
 
 
 def allumage(Expo):
@@ -48,6 +51,6 @@ if __name__ == "__main__":
 
     aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader('templates/'))
 
-
+    from routes import setup_routes
     setup_routes(app)
     web.run_app(app)
