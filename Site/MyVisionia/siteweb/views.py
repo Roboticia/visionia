@@ -56,7 +56,7 @@ async def parametrage(request):
     return web.Response(text='Page de paramétrage du capteur')
 async def options(request):
     return web.Response(text='Page d\'options de l\'application')
-async def camera(request):
+async def televsion(request):
     return web.Response(text='On va tenter')
 
 
