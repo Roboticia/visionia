@@ -39,14 +39,13 @@ Freeram=50
 
 pcs = set()
 logging.debug('SET EFFECTUE')
-
-if __name__ == "__main__":
-
-
-    
-    opt=allumage(Expo)
+opt=allumage(Expo)
     cmd1=opt[0]
     cap=opt[1]
+    
+    
+if __name__ == "__main__":
+   
     app = web.Application()
 
     aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader('templates/'))
