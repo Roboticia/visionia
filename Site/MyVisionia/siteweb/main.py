@@ -40,8 +40,8 @@ Freeram=50
 pcs = set()
 logging.debug('SET EFFECTUE')
 opt=allumage(Expo)
-    cmd1=opt[0]
-    cap=opt[1]
+cmd1=opt[0]
+cap=opt[1]
     
     
 if __name__ == "__main__":
