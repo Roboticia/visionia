@@ -67,3 +67,4 @@ def allumage(Expo):
         subprocess.call(cmd1, shell=True)
         ret, frame = cap.read()
     logging.debug('Temps d\'exposition réglé\n Allumage effectué')
+    return [cmd1,cap]
