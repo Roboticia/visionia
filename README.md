@@ -49,7 +49,7 @@ Cependant il n'est pas possible de faire cela dans un dockerfile à cause d'un a
   pip install aiohttp
   pip install aiohttp-jinja2
   pip install v4l2
-  apt-get install v4l-utils
+  apt-get install v4l-utils -y
 ```
 <p>
   V4L2 fourni certains fichiers quelques peu datés, aussi nous faut il passer de Python 2.x à Python 3.x deux lignes du fichier en transtypant : 
