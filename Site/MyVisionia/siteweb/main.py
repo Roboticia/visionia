@@ -16,8 +16,7 @@ logging.basicConfig(level=logging.DEBUG)
 ROOT = os.path.dirname(__file__)
 Expo=40
 Freeram=50
-cap = None
-cmd1 = None
+
 from camera import allumage
 
 pcs = set()
