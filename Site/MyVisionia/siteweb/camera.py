@@ -9,7 +9,7 @@ import cv2
 import numpy
 import subprocess
 import time
-from utils import ArducamUtils
+
 
 import logging
 from av import VideoFrame
@@ -22,17 +22,15 @@ Expo=40
 Freeram=50
 cmd1 = 'v4l2-ctl -d 0 -c exposure='+str(Expo)
 cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
+arducam_utils = ArducamUtils(0)
+w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+logging.debug('Declaration des variables OK')
 
 def allumage():
     #Init camera
-    
-    arducam_utils = ArducamUtils(0)
     cap.set(cv2.CAP_PROP_CONVERT_RGB, arducam_utils.convert2rgb)
-    
-
     # Aquisition des dimentions de l'image en provenance du capteur
-    w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-    h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
     logging.debug('Caméra initialisée')
 
     # needed to purge the frame with default exposure
