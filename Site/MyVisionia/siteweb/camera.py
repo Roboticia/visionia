@@ -18,6 +18,9 @@ from main import cap
 
 from aiortc.contrib.media import MediaPlayer
 
+cap = None
+cmd1 = None
+
 def allumage(Expo,cmd1,cap):
     #Init camera
     cmd1 = 'v4l2-ctl -d 0 -c exposure='+str(Expo)
