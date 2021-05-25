@@ -15,8 +15,8 @@ logging.basicConfig(level=logging.DEBUG)
 ROOT = os.path.dirname(__file__)
 Expo=40
 Freeram=50
-cap
-cmd1
+var cap: Any!
+var cmd1: Any!
 
 pcs = set()
 logging.debug('SET EFFECTUE')
