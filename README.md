@@ -36,7 +36,9 @@ Cependant il n'est pas possible de faire cela dans un dockerfile à cause d'un a
 </p>
   
   ```sh
-  docker run -it --name visionia --runtime nvidia --rm --net host -v /home/nnvision:/home/ju -v /dev/video0 -v /usr/src/jetson_multimedia_api:/usr/src/jetson_multimedia_api visionia:0 bash
+docker run -it --device /dev/video0:/dev/video0  --name visionia --runtime nvidia --rm --net host \
+           -v /home/nnvision:/home/ju  -v /usr/src/jetson_multimedia_api:/usr/src/jetson_multimedia_api \
+           visionia:0.2 bash
   ```
   
 <p>
