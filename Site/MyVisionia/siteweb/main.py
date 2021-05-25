@@ -24,7 +24,7 @@ logging.debug('SET EFFECTUE')
 
     
 if __name__ == "__main__":
-    opt=allumage(Expo,cmd1,cap)
+    opt=allumage(Expo)
     
     
     app = web.Application()
