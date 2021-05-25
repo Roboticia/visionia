@@ -2,7 +2,7 @@
 
 import logging
 from aiohttp import web
-from camera import allumage
+
 import os
 import aiohttp_jinja2
 import jinja2
@@ -18,6 +18,7 @@ Expo=40
 Freeram=50
 cap = None
 cmd1 = None
+from camera import allumage
 
 pcs = set()
 logging.debug('SET EFFECTUE')
