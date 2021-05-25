@@ -19,7 +19,7 @@ Freeram=50
 
 from camera import allumage
 
-pcs = set()
+
 logging.debug('SET EFFECTUE')
 
     
