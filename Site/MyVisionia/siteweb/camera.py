@@ -2,7 +2,6 @@ from aiortc import RTCPeerConnection, RTCSessionDescription, VideoStreamTrack
 import argparse
 import asyncio
 import json
-import os#a faire sauter
 import platform
 import ssl
 import math
@@ -18,6 +17,26 @@ from aiohttp import web
 from main import cap
 
 from aiortc.contrib.media import MediaPlayer
+
+def allumage(Expo,cmd1,cap):
+    #Init camera
+    cmd1 = 'v4l2-ctl -d 0 -c exposure='+str(Expo)
+    cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
+    arducam_utils = ArducamUtils(0)
+    cap.set(cv2.CAP_PROP_CONVERT_RGB, arducam_utils.convert2rgb)
+    
+
+    # Aquisition des dimentions de l'image en provenance du capteur
+    w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+    h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    logging.debug('Caméra initialisée')
+
+    # needed to purge the frame with default exposure
+    for i in range(6):
+        subprocess.call(cmd1, shell=True)
+        ret, frame = cap.read()
+    logging.debug('Temps d\'exposition réglé\n Allumage effectué')
+    
 
 class CamVideoStreamTrack(VideoStreamTrack):
 
