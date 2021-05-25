@@ -5,6 +5,7 @@ from aiohttp import web
 from aiortc import RTCSessionDescription, RTCPeerConnection
 from camera import CamVideoStreamTrack
 
+pcs = set()
 @aiohttp_jinja2.template('htmldetest.html')
 def accueil(request):
     name = request.rel_url.query.get('name', '')
