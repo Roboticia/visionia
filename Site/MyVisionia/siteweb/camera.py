@@ -17,13 +17,14 @@ from aiohttp import web
 
 from aiortc.contrib.media import MediaPlayer
 
-cap = None
-cmd1 = None
+Expo=40
+Freeram=50
+cmd1 = 'v4l2-ctl -d 0 -c exposure='+str(Expo)
+cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
 
-def allumage(Expo):
+def allumage():
     #Init camera
-    cmd1 = 'v4l2-ctl -d 0 -c exposure='+str(Expo)
-    cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
+    
     arducam_utils = ArducamUtils(0)
     cap.set(cv2.CAP_PROP_CONVERT_RGB, arducam_utils.convert2rgb)
     
