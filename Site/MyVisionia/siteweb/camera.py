@@ -14,7 +14,6 @@ import logging
 from av import VideoFrame
 from utils import ArducamUtils
 from aiohttp import web
-from main import cap
 
 from aiortc.contrib.media import MediaPlayer
 
