@@ -14,8 +14,6 @@ import subprocess
 logging.basicConfig(level=logging.DEBUG)
 
 ROOT = os.path.dirname(__file__)
-Expo=40
-Freeram=50
 
 from camera import allumage
 
@@ -24,7 +22,7 @@ logging.debug('SET EFFECTUE')
 
     
 if __name__ == "__main__":
-    opt=allumage(Expo)
+    allumage()
     
     
     app = web.Application()
