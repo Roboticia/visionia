@@ -125,5 +125,5 @@ ZED_CAMERA_v2_8=0
 ```
   
 ```sh
-  Make
+  make
 ```
