@@ -6,7 +6,7 @@ Factory camera
   Les drivers sont à monter hors du docker
 https://www.arducam.com/docs/camera-for-jetson-nano/mipi-camera-modules-for-jetson-nano/driver-installation/
   
-```
+```sh
 wget https://github.com/ArduCAM/MIPI_Camera/releases/download/v0.0.2/install.sh
 chmod +x install.sh
 ./install.sh
@@ -81,3 +81,49 @@ Ligne 248 :
   Nota : docker image visionia:0.2
   
 </p>
+
+<p>
+  Installation de Darknet, version de Alexey AB
+</p>
+  
+```sh
+git clone https://github.com/AlexeyAB/darknet.git
+cd darknet
+```
+  
+<p>
+On modifie le Makefile de manière à rajouter l'utilisation du GPU (permise par CUDA) et d'OpenCV
+</p>
+
+  
+```py
+GPU=0
+CUDNN=0
+CUDNN_HALF=0
+OPENCV=0
+AVX=0
+OPENMP=0
+LIBSO=0
+ZED_CAMERA=0
+ZED_CAMERA_v2_8=0  
+```
+  
+<p>
+  devient
+</p>
+  
+```py
+GPU=1
+CUDNN=0
+CUDNN_HALF=0
+OPENCV=1
+AVX=0
+OPENMP=0
+LIBSO=0
+ZED_CAMERA=0
+ZED_CAMERA_v2_8=0  
+```
+  
+```sh
+  Make
+```
