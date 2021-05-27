@@ -18,7 +18,7 @@ from aiohttp import web
 
 from aiortc.contrib.media import MediaPlayer
 
-Expo=40
+Expo=60
 Freeram=50
 cmd1 = 'v4l2-ctl -d 0 -c exposure='+str(Expo)
 cap = cv2.VideoCapture(0, cv2.CAP_V4L2)

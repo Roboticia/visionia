@@ -1,3 +1,12 @@
+.entete {
+    height: 80px;
+    background-color: grey;
+    margin-bottom: 8px;
+    text-align:right;
+
+}
+
+
 .red {
     /*height: 40px;*/
     background-color: red;

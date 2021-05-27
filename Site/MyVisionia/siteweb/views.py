@@ -1,4 +1,4 @@
-#les vues de l'affichage
+# les vues de l'affichage
 import aiohttp_jinja2
 import json
 from aiohttp import web
@@ -6,15 +6,20 @@ from aiortc import RTCSessionDescription, RTCPeerConnection
 from camera import CamVideoStreamTrack
 
 pcs = set()
+
+
 @aiohttp_jinja2.template('htmldetest.html')
 def accueil(request):
     name = request.rel_url.query.get('name', '')
     return {'name': name, 'surname': 'Svetlov'}
+
+
 async def on_shutdown(app):
     # close peer connections
     coros = [pc.close() for pc in pcs]
     await asyncio.gather(*coros)
     pcs.clear()
+
 
 async def offer(request):
     params = await request.json()
@@ -43,9 +48,11 @@ async def offer(request):
         ),
     )
 
+
 async def index(request):
     content = open("templates/index.html", "r").read()
     return web.Response(content_type="text/html", text=content)
+
 async def javascript(request):
     content = open("templates/client.js", "r").read()
     return web.Response(content_type="application/javascript", text=content)

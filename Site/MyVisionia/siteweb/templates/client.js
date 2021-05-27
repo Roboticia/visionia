@@ -52,14 +52,17 @@ function start() {
     pc.addEventListener('track', function(evt) {
         if (evt.track.kind == 'video') {
             document.getElementById('video').srcObject = evt.streams[0];
-        } else {
-            document.getElementById('audio').srcObject = evt.streams[0];
         }
     });
-
+    document.getElementById('1').style.display = 'inline-block';
     document.getElementById('start').style.display = 'none';
-    negotiate();
     document.getElementById('stop').style.display = 'inline-block';
+
+    document.getElementById('2').style.display = 'inline-block';
+    document.getElementById('apply').style.display = 'inline-block';
+    document.getElementById('3').style.display = 'inline-block';
+    document.getElementById('4').style.display = 'inline-block';
+    negotiate();
 }
 
 function stop() {
