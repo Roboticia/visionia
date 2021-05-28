@@ -10,7 +10,7 @@ def setup_routes(app):
     app.router.add_get('/parametrage', parametrage)
     app.router.add_get('/visualisation', television)
     app.router.add_static('/stockage', 'templates/LEdossier')
-    app.router.add_get("/video", index)
+    app.router.add_get("/video", index(15))
     app.router.add_get("/client.js", javascript)
     app.router.add_post("/offer", offer)
     

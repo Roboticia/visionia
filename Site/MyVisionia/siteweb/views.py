@@ -8,6 +8,7 @@ from camera import CamVideoStreamTrack
 pcs = set()
 
 
+
 @aiohttp_jinja2.template('htmldetest.html')
 def accueil(request):
     name = request.rel_url.query.get('name', '')
@@ -48,10 +49,10 @@ async def offer(request):
         ),
     )
 
-
-async def index(request):
-    content = open("templates/index.html", "r").read()
-    return web.Response(content_type="text/html", text=content)
+@aiohttp_jinja2.template('index.html')
+def index():
+    Expo = 42
+    return {'expo': Expo}
 
 async def javascript(request):
     content = open("templates/client.js", "r").read()
@@ -60,10 +61,13 @@ async def javascript(request):
 async def logo(request):
     content = open("templates/logo.html", "r").read()
     return web.Response(content_type="text/html", text=content)
+
 async def parametrage(request):
     return web.Response(text='Page de paramétrage du capteur')
+
 async def options(request):
     return web.Response(text='Page d\'options de l\'application')
+
 async def television(request):
     return web.Response(text='On va tenter')
 

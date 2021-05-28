@@ -54,15 +54,16 @@ function start() {
             document.getElementById('video').srcObject = evt.streams[0];
         }
     });
+    negotiate();
     document.getElementById('1').style.display = 'inline-block';
     document.getElementById('start').style.display = 'none';
-    document.getElementById('stop').style.display = 'inline-block';
+    //document.getElementById('stop').style.display = 'inline-block';
 
     document.getElementById('2').style.display = 'inline-block';
     document.getElementById('apply').style.display = 'inline-block';
     document.getElementById('3').style.display = 'inline-block';
     document.getElementById('4').style.display = 'inline-block';
-    negotiate();
+
 }
 
 function stop() {
