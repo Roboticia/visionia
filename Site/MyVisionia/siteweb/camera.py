@@ -9,6 +9,7 @@ import cv2
 import numpy
 import subprocess
 import time
+import configparser
 
 
 import logging
@@ -20,6 +21,7 @@ from aiortc.contrib.media import MediaPlayer
 
 Expo=90
 Freeram=50
+Lumino=50
 cmd1 = 'v4l2-ctl -d 0 -c exposure='+str(Expo)
 cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
 arducam_utils = ArducamUtils(0)

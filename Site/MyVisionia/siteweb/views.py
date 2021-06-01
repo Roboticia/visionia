@@ -4,8 +4,11 @@ import json
 from aiohttp import web
 from aiortc import RTCSessionDescription, RTCPeerConnection
 from camera import CamVideoStreamTrack
+import configparser
 
 pcs = set()
+
+
 
 
 
@@ -25,12 +28,12 @@ async def on_shutdown(app):
 async def offer(request):
     params = await request.json()
     offer = RTCSessionDescription(sdp=params["sdp"], type=params["type"])
-
     pc = RTCPeerConnection()
     pcs.add(pc)
 
     @pc.on("connectionstatechange")
     async def on_connectionstatechange():
+
         print("Connection state is %s" % pc.connectionState)
         if pc.connectionState == "failed":
             await pc.close()
@@ -50,9 +53,10 @@ async def offer(request):
     )
 
 @aiohttp_jinja2.template('index.html')
-def index():
-    Expo = 42
-    return {'expo': Expo}
+def index(request):
+    from camera import Expo,Lumino
+
+    return {'expo': Expo,'lum':Lumino}
 
 async def javascript(request):
     content = open("templates/client.js", "r").read()

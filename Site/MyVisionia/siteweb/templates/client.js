@@ -2,7 +2,6 @@ var pc = null;
 
 function negotiate() {
     pc.addTransceiver('video', {direction: 'recvonly'});
-    pc.addTransceiver('audio', {direction: 'recvonly'});
     return pc.createOffer().then(function(offer) {
         return pc.setLocalDescription(offer);
     }).then(function() {
@@ -55,15 +54,24 @@ function start() {
         }
     });
     negotiate();
-    document.getElementById('1').style.display = 'inline-block';
+
     document.getElementById('start').style.display = 'none';
     //document.getElementById('stop').style.display = 'inline-block';
-
+    document.getElementById('1').style.display = 'inline-block';
     document.getElementById('2').style.display = 'inline-block';
-    document.getElementById('apply').style.display = 'inline-block';
     document.getElementById('3').style.display = 'inline-block';
     document.getElementById('4').style.display = 'inline-block';
+    document.getElementById('apply').style.display = 'inline-block';
+    document.getElementById('Texp').style.display = 'inline-block';
+    document.getElementById('exp').style.display = 'inline-block';
 
+    document.getElementById('5').style.display = 'inline-block';
+    document.getElementById('6').style.display = 'inline-block';
+    document.getElementById('7').style.display = 'inline-block';
+    document.getElementById('8').style.display = 'inline-block';
+    document.getElementById('lapply').style.display = 'inline-block';
+    document.getElementById('Tlum').style.display = 'inline-block';
+    document.getElementById('lum').style.display = 'inline-block';
 }
 
 function stop() {

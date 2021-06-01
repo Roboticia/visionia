@@ -21,11 +21,15 @@
 
     </style>
 </head>
+
+
+
+
 <body>
 <div class="container-fluid entete">
     <div class="row">
-
-        <a href="/">
+        <div classe
+        <a href="/" style="text-align:right">
             <img src="/stockage/contenu/logo.png" alt="Logo Menu" height="80">
         </a>
 
@@ -34,32 +38,78 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-7 centre">
             <div id="media">
                 <video id="video" autoplay="true" playsinline="true"></video>
             </div>
-
         </div>
-        <div class="col-md-5 text-align:center">
-                <h1>Temps d'exposition</h1>
+
+        <div class="col-md-5 centre">
+
+            <h2 id="Texp" style="display: none">Temps d'exposition</h2>
             <div class="row">
-                <div class="col-4 zonebouttons">
+
+                <div class="col-4 centre">
+
                     <button id="start" onclick="start()">Start</button>
+
                     <button id="stop" style="display: none" onclick="stop()">Stop</button>
 
-                    <button id="1" style="display: none" onclick="Moinsdix()"><<</button>
-                    <button id="2" style="display: none" onclick="Moinsdeux()"><</button>
 
+                    <div>
+                        <a href = "/plusdix">
+                            <button id="2" style="display: none" onclick="Moinsdeux()"><</button>
+                        </a>
+                    </div>
+                    <div>
+                        <button id="1"  style="display: none" onclick="Moinsdix()"><<</button>
+                    </div>
                 </div>
-                <div class="col-4 zonebouttons">
+                <div class="col-4 centre">
 
-                    <p>{{ expo }}</p>
+                    <div>
+                        <h4 id="exp" style="display: none">{{ expo }}</h4>
+                    </div>
                     <button id="apply" style="display: none" onclick="Apply()">Appliquer</button>
 
                 </div>
-                <div class="col-4 zonebouttons">
-                    <button id="3" style="display: none" onclick="Plusdeux()">></button>
-                    <button id="4" style="display: none" onclick="Plusdix()">>></button>
+                <div class="col-4 centre">
+                    <div>
+                        <button id="3" style="display: none" onclick="Plusdeux()">></button>
+                    </div>
+                    <div>
+                        <button id="4" style="display: none" onclick="Plusdix()">>></button>
+                    </div>
+                </div>
+            </div>
+            <h2 id="Tlum" style="display: none">Luminosité</h2>
+            <div class="row">
+
+                <div class="col-4 centre">
+                    <div>
+                        <a href = "/plusdix">
+                            <button id="5" style="display: none" onclick="Moinsdeux()"><</button>
+                        </a>
+                    </div>
+                    <div>
+                        <button id="6"  style="display: none" onclick="Moinsdix()"><<</button>
+                    </div>
+                </div>
+                <div class="col-4 centre">
+
+                    <div>
+                        <h4 id="lum" style="display: none">{{ lum }}</h4>
+                    </div>
+                    <button id="lapply" style="display: none" onclick="Apply()">Appliquer</button>
+
+                </div>
+                <div class="col-4 centre">
+                    <div>
+                        <button id="7" style="display: none" onclick="Plusdeux()">></button>
+                    </div>
+                    <div>
+                        <button id="8" style="display: none" onclick="Plusdix()">>></button>
+                    </div>
                 </div>
             </div>
         </div>
