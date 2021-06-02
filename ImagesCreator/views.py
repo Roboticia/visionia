@@ -40,16 +40,13 @@ async def offer(request):
         ),
     )
 
-async def index(request):
-    content = open("templates/index.html", "r").read()
-    return web.Response(content_type="text/html", text=content)
+@aiohttp_jinja2.template('index.html')
+def index(request):
+    from camera import Expo, Cptimages
+    return {'expo': Expo,'Nbimages':Cptimages}
 async def javascript(request):
     content = open("templates/client.js", "r").read()
     return web.Response(content_type="application/javascript", text=content)
-
-async def logo(request):
-    content = open("templates/logo.html", "r").read()
-    return web.Response(content_type="text/html", text=content)
 
 
 

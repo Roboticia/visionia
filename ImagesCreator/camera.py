@@ -20,9 +20,11 @@ from aiortc.contrib.media import MediaPlayer
 
 Expo=40
 Freeram=50
-ecriture=0
+Ecriture=0
 Secentrimages=2
-moduloecriture=Expo/Secentrimages
+Cptimages=0
+Moduloecriture=Expo/Secentrimages
+
 
 cmd1 = 'v4l2-ctl -d 0 -c exposure='+str(Expo)
 cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
@@ -46,18 +48,21 @@ def allumage():
 
 class CamVideoStreamTrack(VideoStreamTrack):
 
-
     def __init__(self):
         super().__init__()  # don't forget this!
         self.counter = 0
         self.frames = []
 
+
     async def recv(self):
         ret, frame = cap.read()
         frame = arducam_utils.convert(frame)
         cv2.imwrite('cam.jpg',frame)
-        if ecriture % moduloecriture==0
-        cv2.imwrite('../test/cam'+("{:0=4}".format(ecriture))+'.jpg', frame)
+        if Ecriture % Moduloecriture==0 :
+            cv2.imwrite('../Documents/test/cam' + ("{:0=4}".format(Cptimages)) + '.jpg', frame)
+            Cptimages+=1
+        Ecriture+=1
+        cv2.imwrite('cam.jpg')
         img = cv2.imread('cam.jpg')
         if self.counter%(Freeram)==(0):
             self.frames=[]
