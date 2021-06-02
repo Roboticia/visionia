@@ -45,6 +45,9 @@ function start() {
         sdpSemantics: 'unified-plan'
     };
 
+    if (document.getElementById('use-stun').checked) {
+        config.iceServers = [{urls: ['stun:stun.l.google.com:19302']}];
+    }
     pc = new RTCPeerConnection(config);
 
     // connect audio / video
@@ -57,10 +60,7 @@ function start() {
 
     document.getElementById('start').style.display = 'none';
     //document.getElementById('stop').style.display = 'inline-block';
-    document.getElementById('1').style.display = 'inline-block';
-    document.getElementById('2').style.display = 'inline-block';
-    document.getElementById('3').style.display = 'inline-block';
-    document.getElementById('4').style.display = 'inline-block';
+
     document.getElementById('apply').style.display = 'inline-block';
     document.getElementById('Texp').style.display = 'inline-block';
     document.getElementById('exp').style.display = 'inline-block';

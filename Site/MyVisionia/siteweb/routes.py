@@ -1,6 +1,6 @@
 #Les chemins
 
-from views import accueil, logo, parametrage, options, television, index, javascript, offer,television
+from views import accueil, logo, parametrage, options, television, index, javascript, offer,television, variables
 
 
 def setup_routes(app):
@@ -13,16 +13,5 @@ def setup_routes(app):
     app.router.add_get("/video", index)
     app.router.add_get("/client.js", javascript)
     app.router.add_post("/offer", offer)
-    app.router.add_post("/plusdix", plusdix)
-    app.router.add_post("/plusdeux", plusdeux)
-    app.router.add_post("/moinsdeux", moinsdeux)
-    app.router.add_post("/moinsdix", moinsdix)
+    app.router.add_post("/var", variables)
 
-def plusdix():
-    print("GROS PRINT DU PLUS DIX")
-def plusdeux():
-    print("GROS PRINT DU PLUS DEUX")
-def moinsdeux():
-    print("GROS PRINT DU MOINS DEUX")
-def moinsdix():
-    print("GROS PRINT DU MOINS DIX")

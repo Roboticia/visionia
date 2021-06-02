@@ -3,7 +3,7 @@ import aiohttp_jinja2
 import json
 from aiohttp import web
 from aiortc import RTCSessionDescription, RTCPeerConnection
-from camera import CamVideoStreamTrack
+from camera import CamVideoStreamTrack, Expo, Lumino
 import configparser
 
 pcs = set()
@@ -51,6 +51,13 @@ async def offer(request):
             {"sdp": pc.localDescription.sdp, "type": pc.localDescription.type}
         ),
     )
+async def variables (request):
+    try:
+        Lumino = request.query['light']
+        Expo = request.query['exposure']
+
+    except Exception as e :
+        return web.Response(text='Nope', status=500)
 
 @aiohttp_jinja2.template('index.html')
 def index(request):
