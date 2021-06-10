@@ -60,10 +60,29 @@ async def variables (request):
         return web.Response(text='Nope', status=500)
 
 @aiohttp_jinja2.template('index.html')
-def index(request):
-    from camera import Expo,Lumino
+async def index(request):
+    Expo=5
+    Luminom=3
 
+    if request.method == 'POST':
+        contenu = await request.post()
+        print(contenu)
+        # error = validate_json(contenu)
+        # if error:
+        #     return {'error': error}
+        # else:
+        #     # login form is valid
+        #     location = request.app.router['index'].url_for()
+        #     raise web.HTTPFound(location=location)
+    #if request.method == POST:
+    #    ecrire json
+
+    #lire json
     return {'expo': Expo,'lum':Lumino}
+
+async def index_post(request):
+    data = await request.post()
+    web.Response(content_type="text/html", text=data)
 
 async def javascript(request):
     content = open("templates/client.js", "r").read()
@@ -74,7 +93,8 @@ async def logo(request):
     return web.Response(content_type="text/html", text=content)
 
 async def parametrage(request):
-    return web.Response(text='Page de paramétrage du capteur')
+    content = open("templates/spintest.html", "r").read()
+    return web.Response(content_type="text/html", text=content)
 
 async def options(request):
     return web.Response(text='Page d\'options de l\'application')

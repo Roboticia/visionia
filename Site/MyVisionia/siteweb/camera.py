@@ -18,7 +18,7 @@ from utils import ArducamUtils
 from aiohttp import web
 
 from aiortc.contrib.media import MediaPlayer
-
+logging.basicConfig(level=logging.DEBUG)
 Expo=90
 Freeram=50
 Lumino=50
