@@ -3,8 +3,10 @@ import aiohttp_jinja2
 import json
 from aiohttp import web
 from aiortc import RTCSessionDescription, RTCPeerConnection
-from camera import CamVideoStreamTrack, Expo, Lumino
+from camera import CamVideoStreamTrack
 import configparser
+import logging
+logging.basicConfig(level=logging.INFO)
 
 pcs = set()
 
@@ -51,38 +53,36 @@ async def offer(request):
             {"sdp": pc.localDescription.sdp, "type": pc.localDescription.type}
         ),
     )
-async def variables (request):
-    try:
-        Lumino = request.query['light']
-        Expo = request.query['exposure']
-
-    except Exception as e :
-        return web.Response(text='Nope', status=500)
 
 @aiohttp_jinja2.template('index.html')
 async def index(request):
-    Expo=5
-    Luminom=3
+    from camera import Expo, Lumino
 
     if request.method == 'POST':
         contenu = await request.post()
-        print(contenu)
-        # error = validate_json(contenu)
-        # if error:
-        #     return {'error': error}
-        # else:
-        #     # login form is valid
-        #     location = request.app.router['index'].url_for()
-        #     raise web.HTTPFound(location=location)
-    #if request.method == POST:
-    #    ecrire json
+        logging.info("POST = "+str(contenu))
 
-    #lire json
+
+        with open('sauvegarde.json','r+') as json_file:
+            data = json.load(json_file)
+            print (data['courant'])
+            for p in data['courant']:
+                p['exposition']=contenu.getone("Expo", Expo)
+                p['lumiere'] = contenu.getone("Lumi", Lumino)
+                print(p['exposition'])
+                print("lumiere"+str(p['lumiere']))
+                print (data)
+            json.dump(data, json_file)
+            json_file.close()
+
+        with open('sauvegarde.json') as json_file:
+            for p in data['courant']:
+                Expo = int(p['exposition'])
+                Lumino = int(p['lumiere'])
+            json_file.close()
+
     return {'expo': Expo,'lum':Lumino}
 
-async def index_post(request):
-    data = await request.post()
-    web.Response(content_type="text/html", text=data)
 
 async def javascript(request):
     content = open("templates/client.js", "r").read()

@@ -2,24 +2,15 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/stockage/contenu/logoseul.ico">
     <link rel="stylesheet" href="/stockage/css/bootstrap.min.css">
     <link rel="stylesheet" href="/stockage/css/style.css">
-    <title>WebRTC webcam</title>
-    <style>
-    button {
-        padding: 11px 22px;
-        margin-bottom: 4px;
-    }
 
-    video {
-        max-width: 100%;
-        max-height : 95%;
-    }
+    <script src="/stockage/jquery-3.6.0.min.js"></script>
+    <script src="/stockage/spin/src/bootstrap-input-spinner.js"></script>
+    <title>Visionia : contrôle de votre caméra industrielle</title>
 
 
-
-
-    </style>
 </head>
 
 
@@ -27,16 +18,17 @@
 
 <body>
 <div class="container-fluid entete">
-    <div class="row">
-        <div classe="col-md-4">
+   <div class="row">
+        <div class="col-6" >
+            <h4>&nbsp;</h4>
             <h1>Paramètres</h1>
         </div>
-        <div classe="col-md-4">
-            <a href="/" style="text-align:right">
+        <div class="col-6 right">
+            <a href="/">
                 <img src="/stockage/contenu/logo.png" alt="Logo Menu" height="80">
             </a>
         </div>
-    </div>
+   </div>
 </div>
 
 <div class="container-fluid">
@@ -54,69 +46,65 @@
 
                 <div class="col-4 centre">
 
-                    <button id="start" onclick="start()">Start</button>
+                    <button id="start" class="btn btn-secondary btn-lg" onclick="start()">Start</button>
 
                     <button id="stop" style="display: none" onclick="stop()">Stop</button>
-
-
-
-                    <input id="number" type="number" max="100" min="15" step="5"  value="{{ expo }}">
                 </div>
+
                 <div class="col-4 centre">
-
-                    <div>
                         <h4 id="exp" style="display: none">{{ expo }} ms</h4>
-                    </div>
-                    <button id="apply" style="display: none" onclick="Apply()">Appliquer</button>
-
                 </div>
 
             </div>
 
-            <h2 id="Tlum" style="display: none">Luminosité</h2>
+            <form action="/video" method="post" >
+
+                <input name="Expo" class="buttons-only"  value="{{ expo }}" min="8" max="200" style="display: none;">
+                <input name="Lumi" class="buttons-only"  value="{{ lum }}" min="8" max="200" style="display: none;">
+                <button type="submit" class="btn btn-secondary btn-lg">Change les données</button>
+
+            </form>
+
+
+            <div class="row centre">
+                <div class="col-4">
+                </div>
+                <div class="col-4 centre">
+                    <button id="apply" style="display: none" onclick="Apply()" class="btn btn-secondary btn-lg">Appliquer</button>
+                </div>
+            </div>
+
+
+
+
             <div class="row">
-
-                <div class="col-4 centre">
-                    <div>
-                        <a href = "/plusdix">
-                            <button id="5" style="display: none" onclick="Moinsdeux()"><</button>
-                        </a>
-                    </div>
-                    <div>
-                        <button id="6"  style="display: none" onclick="Moinsdix()"><<</button>
-                    </div>
-                </div>
-                <div class="col-4 centre">
-
-                    <div>
-                        <h4 id="lum" style="display: none">{{ lum }} %</h4>
-                    </div>
-                    <button id="lapply" style="display: none" onclick="Apply()">Appliquer</button>
-
-                </div>
-                <div class="col-4 centre">
-                    <div>
-                        <button id="7" style="display: none" onclick="Plusdeux()">></button>
-                    </div>
-                    <div>
-                        <button id="8" style="display: none" onclick="Plusdix()">>></button>
-                    </div>
-                </div>
+                <h2 id="Tlum" style="display: none">Luminosité</h2>
+                <h4 id="lum" style="display: none">{{ lum }} %</h4>
             </div>
         </div>
         <div class="row">
-            <div class="option">
+
+            <div class="option" style="inline-block" id="stun">
                 <input id="use-stun" type="checkbox"/>
-                <label for="use-stun">Use STUN server</label>
+                <label for="use-stun">Problème d'affichage vidéo ? Cochez cette case</label>
             </div>
         </div>
-
+        <div>
+            <label for="say">Quelle salutation voulez-vous dire ?</label>
+            <input name="say" id="say" value="Salut">
+        </div>
     </div>
 </div>
 
 
 
+
+
 <script src="client.js"></script>
+<script>
+    $("input[type='number']").inputSpinner()
+    $(".buttons-only").inputSpinner({buttonsOnly: true})
+</script>
 
 
 

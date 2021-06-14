@@ -58,18 +58,15 @@ function start() {
     });
     negotiate();
 
+    document.getElementById('stun').style.display = 'none';
     document.getElementById('start').style.display = 'none';
     //document.getElementById('stop').style.display = 'inline-block';
 
     document.getElementById('apply').style.display = 'inline-block';
     document.getElementById('Texp').style.display = 'inline-block';
     document.getElementById('exp').style.display = 'inline-block';
-
-    document.getElementById('5').style.display = 'inline-block';
-    document.getElementById('6').style.display = 'inline-block';
-    document.getElementById('7').style.display = 'inline-block';
-    document.getElementById('8').style.display = 'inline-block';
-    document.getElementById('lapply').style.display = 'inline-block';
+    document.getElementById('expobutton').style.display = 'inline-block';
+    //document.getElementById('lapply').style.display = 'inline-block';
     document.getElementById('Tlum').style.display = 'inline-block';
     document.getElementById('lum').style.display = 'inline-block';
 }
@@ -82,3 +79,26 @@ function stop() {
         pc.close();
     }, 500);
 }
+
+$(document).on('click', '.number-spinner button', function () {
+	var btn = $(this),
+		oldValue = btn.closest('.number-spinner').find('input').val().trim(),
+		newVal = 0;
+
+	if (btn.attr('data-dir') == 'up') {
+		newVal = parseInt(oldValue) + 1;
+	} else {
+		if (oldValue > 1) {
+			newVal = parseInt(oldValue) - 1;
+		} else {
+			newVal = 1;
+		}
+	}
+	btn.closest('.number-spinner').find('input').val(newVal);
+});
+var $changedInput = $("#changedInput")
+
+$changedInput.on("change", function (event) {
+    $valueOnChange.html($(event.target).val())
+
+})

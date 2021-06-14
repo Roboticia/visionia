@@ -1,5 +1,5 @@
 #Les chemins
-from views import accueil, logo, parametrage, options, television, index, javascript, offer,television, variables, index_post
+from views import accueil, logo, parametrage, options, television, index, javascript, offer,television
 
 
 def setup_routes(app):
@@ -13,5 +13,5 @@ def setup_routes(app):
     app.router.add_post('/video', index)
     app.router.add_get("/client.js", javascript)
     app.router.add_post("/offer", offer)
-    app.router.add_post("/var", variables)
+
 

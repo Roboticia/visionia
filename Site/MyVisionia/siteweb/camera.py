@@ -18,10 +18,20 @@ from utils import ArducamUtils
 from aiohttp import web
 
 from aiortc.contrib.media import MediaPlayer
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
+
 Expo=90
-Freeram=50
 Lumino=50
+Freeram=50
+
+with open('sauvegarde.json') as json_file:
+    data = json.load(json_file)
+    for p in data['courant']:
+        Expo = int(p['exposition'])
+        Lumino = int(p['lumiere'])
+        Freeram = int(p['taillecycle'])
+    json_file.close()
+
 cmd1 = 'v4l2-ctl -d 0 -c exposure='+str(Expo)
 cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
 arducam_utils = ArducamUtils(0)

@@ -2,7 +2,9 @@
     height: 80px;
     background-color: grey;
     margin-bottom: 8px;
-
+}
+.couleurentete {
+    color: white;
 }
 
 .right {
@@ -12,7 +14,10 @@
     text-align:center;
 
 }
-
+video {
+        max-width: 100%;
+        max-height : 95%;
+    }
 
 .red {
     /*height: 40px;*/
