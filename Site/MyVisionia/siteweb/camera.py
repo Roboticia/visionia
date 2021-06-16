@@ -20,7 +20,7 @@ from aiohttp import web
 from aiortc.contrib.media import MediaPlayer
 logging.basicConfig(level=logging.INFO)
 
-Expo=90
+Expo=1000
 Lumino=50
 Freeram=50
 
@@ -32,14 +32,18 @@ with open('sauvegarde.json') as json_file:
         Freeram = int(p['taillecycle'])
     json_file.close()
 
-cmd1 = 'v4l2-ctl -d 0 -c exposure='+str(Expo)
 cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
 arducam_utils = ArducamUtils(0)
-w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-logging.debug('Declaration des variables OK')
 
-def allumage():
+
+
+def allumage(Expo):
+
+    cmd1 = 'v4l2-ctl -d 0 -c exposure='+str(Expo)
+    print (Expo)
+    w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+    h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    logging.debug('Declaration des variables OK')
     #Init camera
     cap.set(cv2.CAP_PROP_CONVERT_RGB, arducam_utils.convert2rgb)
     # Aquisition des dimentions de l'image en provenance du capteur

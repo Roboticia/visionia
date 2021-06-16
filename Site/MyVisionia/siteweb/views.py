@@ -56,30 +56,38 @@ async def offer(request):
 
 @aiohttp_jinja2.template('index.html')
 async def index(request):
-    from camera import Expo, Lumino
+    from camera import Expo, Lumino, allumage
 
     if request.method == 'POST':
         contenu = await request.post()
         logging.info("POST = "+str(contenu))
 
 
-        with open('sauvegarde.json','r+') as json_file:
+        with open('sauvegarde.json','r') as json_file:
             data = json.load(json_file)
-            print (data['courant'])
-            for p in data['courant']:
-                p['exposition']=contenu.getone("Expo", Expo)
-                p['lumiere'] = contenu.getone("Lumi", Lumino)
-                print(p['exposition'])
-                print("lumiere"+str(p['lumiere']))
-                print (data)
+        print (data['courant'])
+        for p in data['courant']:
+            p['exposition']=contenu.getone("Expo", Expo)
+            p['lumiere'] = contenu.getone("Lumi", Lumino)
+            print(p['exposition'])
+            print("lumiere"+str(p['lumiere']))
+            print (data)
+
+        json_file.close()
+
+        with open('sauvegarde.json','w') as json_file:
             json.dump(data, json_file)
-            json_file.close()
+        json_file.close()
 
         with open('sauvegarde.json') as json_file:
+            data = json.load(json_file)
             for p in data['courant']:
                 Expo = int(p['exposition'])
                 Lumino = int(p['lumiere'])
+                Freeram = int(p['taillecycle'])
             json_file.close()
+        allumage(Expo)
+        print ("ICI")
 
     return {'expo': Expo,'lum':Lumino}
 
