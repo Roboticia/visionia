@@ -1,17 +1,14 @@
 #Les chemins
-from views import accueil, logo, parametrage, options, television, index, javascript, offer,television
+from views import accueil, index, javascript, offer, acquisition
 
 
 def setup_routes(app):
     app.router.add_get('/', accueil)
-    app.router.add_get('/logo', logo)
-    app.router.add_get('/options', options)
-    app.router.add_get('/param', parametrage)
-    app.router.add_get('/visualisation', television)
+    app.router.add_get('/acquisition', acquisition)
     app.router.add_static('/stockage', 'templates/LEdossier')
     app.router.add_get("/video", index)
     app.router.add_post('/video', index)
-    app.router.add_get("/client.js", javascript)
+    app.router.add_get("/client.param.js", javascript)
     app.router.add_post("/offer", offer)
 
 

@@ -6,18 +6,21 @@ from aiortc import RTCSessionDescription, RTCPeerConnection
 from camera import CamVideoStreamTrack
 import configparser
 import logging
+
 logging.basicConfig(level=logging.INFO)
 
 pcs = set()
 
 
-
-
-
-@aiohttp_jinja2.template('htmldetest.html')
+@aiohttp_jinja2.template('accueil.html')
 def accueil(request):
     name = request.rel_url.query.get('name', '')
     return {'name': name, 'surname': 'Svetlov'}
+
+
+@aiohttp_jinja2.template('acquisition.html')
+async def acquisition(request):
+    return {}
 
 
 async def on_shutdown(app):
@@ -27,7 +30,7 @@ async def on_shutdown(app):
     pcs.clear()
 
 
-async def offer(request):
+async def offer(request, mode='param'):
     params = await request.json()
     offer = RTCSessionDescription(sdp=params["sdp"], type=params["type"])
     pc = RTCPeerConnection()
@@ -40,9 +43,11 @@ async def offer(request):
         if pc.connectionState == "failed":
             await pc.close()
             pcs.discard(pc)
-        
+
     await pc.setRemoteDescription(offer)
     pc.addTrack(CamVideoStreamTrack())
+    if mode == 'memory':
+        CamVideoStreamTrack.mode = 'memory'
 
     answer = await pc.createAnswer()
     await pc.setLocalDescription(answer)
@@ -54,28 +59,28 @@ async def offer(request):
         ),
     )
 
-@aiohttp_jinja2.template('index.html')
+
+@aiohttp_jinja2.template('param.html')
 async def index(request):
     from camera import Expo, Lumino, allumage
 
     if request.method == 'POST':
         contenu = await request.post()
-        logging.info("POST = "+str(contenu))
+        logging.info("POST = " + str(contenu))
 
-
-        with open('sauvegarde.json','r') as json_file:
+        with open('sauvegarde.json', 'r') as json_file:
             data = json.load(json_file)
-        print (data['courant'])
+        print(data['courant'])
         for p in data['courant']:
-            p['exposition']=contenu.getone("Expo", Expo)
+            p['exposition'] = contenu.getone("Expo", Expo)
             p['lumiere'] = contenu.getone("Lumi", Lumino)
             print(p['exposition'])
-            print("lumiere"+str(p['lumiere']))
-            print (data)
+            print("lumiere" + str(p['lumiere']))
+            print(data)
 
         json_file.close()
 
-        with open('sauvegarde.json','w') as json_file:
+        with open('sauvegarde.json', 'w') as json_file:
             json.dump(data, json_file)
         json_file.close()
 
@@ -87,31 +92,10 @@ async def index(request):
                 Freeram = int(p['taillecycle'])
             json_file.close()
         allumage(Expo)
-        print ("ICI")
 
-    return {'expo': Expo,'lum':Lumino}
+    return {'expo': Expo, 'lum': Lumino}
 
 
 async def javascript(request):
-    content = open("templates/client.js", "r").read()
+    content = open("templates/client.param.js", "r").read()
     return web.Response(content_type="application/javascript", text=content)
-
-async def logo(request):
-    content = open("templates/logo.html", "r").read()
-    return web.Response(content_type="text/html", text=content)
-
-async def parametrage(request):
-    content = open("templates/spintest.html", "r").read()
-    return web.Response(content_type="text/html", text=content)
-
-async def options(request):
-    return web.Response(text='Page d\'options de l\'application')
-
-async def television(request):
-    return web.Response(text='On va tenter')
-
-
-
-
-
-

@@ -60,12 +60,12 @@ function start() {
 
     document.getElementById('stun').style.display = 'none';
     document.getElementById('start').style.display = 'none';
+
     //document.getElementById('stop').style.display = 'inline-block';
 
-    document.getElementById('apply').style.display = 'inline-block';
     document.getElementById('Texp').style.display = 'inline-block';
     document.getElementById('exp').style.display = 'inline-block';
-    document.getElementById('expobutton').style.display = 'inline-block';
+    document.getElementById('changedata').style.display = 'inline-block';
     //document.getElementById('lapply').style.display = 'inline-block';
     document.getElementById('Tlum').style.display = 'inline-block';
     document.getElementById('lum').style.display = 'inline-block';

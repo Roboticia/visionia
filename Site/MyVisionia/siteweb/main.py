@@ -8,7 +8,7 @@ from camera import allumage, Expo
 import subprocess
 from routes import setup_routes
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 #print(logging.root.level)
 ROOT = os.path.dirname(__file__)
 

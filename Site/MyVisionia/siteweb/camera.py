@@ -59,27 +59,29 @@ def allumage(Expo):
 class CamVideoStreamTrack(VideoStreamTrack):
 
 
-    def __init__(self):
+    def __init__(self,mode='usual'):
         super().__init__()  # don't forget this!
         self.counter = 0
         self.frames = []
+        self.mode=mode
 
     async def recv(self):
         ret, frame = cap.read()
         frame = arducam_utils.convert(frame)
         cv2.imwrite('cam.jpg',frame)
-
-        img = cv2.imread('cam.jpg')
-        if self.counter%(Freeram)==(0):
-            self.frames=[]
-            logging.debug('Liste vidée')
-        self.frames.append(VideoFrame.from_ndarray(numpy.array(img)))
-        logging.debug('Frame dans la liste')
-        pts, time_base = await self.next_timestamp()
-        frame = self.frames[self.counter%(Freeram)]
-        logging.debug('Frame lue')
-        logging.debug(self.counter)
-        frame.pts = pts
-        frame.time_base = time_base
-        self.counter += 1
+        if self.mode == 'usual':
+            logging.debug('Usual mode')
+            img = cv2.imread('cam.jpg')
+            if self.counter%(Freeram)==(0):
+                self.frames=[]
+                logging.debug('Liste vidée')
+            self.frames.append(VideoFrame.from_ndarray(numpy.array(img)))
+            logging.debug('Frame dans la liste')
+            pts, time_base = await self.next_timestamp()
+            frame = self.frames[self.counter%(Freeram)]
+            logging.debug('Frame lue')
+            logging.debug(self.counter)
+            frame.pts = pts
+            frame.time_base = time_base
+            self.counter += 1
         return frame

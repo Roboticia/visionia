@@ -46,7 +46,7 @@
 
                 <div class="col-4 centre">
 
-                    <button id="start" class="btn btn-secondary btn-lg" onclick="start()">Lancer la caméra</button>
+                    <button id="start"  class="btn btn-secondary btn-lg" onclick="start()">Lancer la caméra</button>
 
                     <button id="stop" style="display: none" onclick="stop()">Stop</button>
                 </div>
@@ -57,29 +57,23 @@
 
             </div>
 
-            <form action="/video" method="post" >
 
-                <input name="Expo" class="buttons-only"  value="{{ expo }}" min="8" max="200" style="display: none;">
-                <input name="Lumi" class="buttons-only"  value="{{ lum }}" min="8" max="200" style="display: none;">
-                <button type="submit" class="btn btn-secondary btn-lg">Change les données</button>
+                <form action="/video" method="post" >
+                    <input name="Expo" class="buttons-only"  value="{{ expo }}" min="8" max="200" style="display: none;">
+                    <h2 id="Tlum" style="display: none">Luminosité</h2>
+                    <h4 id="lum" style="display: none">{{ lum }} %</h4>
+                    <input name="Lumi" class="buttons-only"  value="{{ lum }}" min="8" max="200" style="display: none;">
+                    <button id="changedata" style="display: none;" type="submit" class="btn btn-secondary btn-lg">Change les données</button>
+                </form>
 
-            </form>
 
 
-            <div class="row centre">
-                <div class="col-4">
-                </div>
-                <div class="col-4 centre">
-                    <button id="apply" style="display: none" onclick="Apply()" class="btn btn-secondary btn-lg">Appliquer</button>
-                </div>
-            </div>
 
 
 
 
             <div class="row">
-                <h2 id="Tlum" style="display: none">Luminosité</h2>
-                <h4 id="lum" style="display: none">{{ lum }} %</h4>
+
             </div>
         </div>
         <div class="row">
@@ -100,7 +94,7 @@
 
 
 
-<script src="client.js"></script>
+<script src="client.param.js"></script>
 <script>
     $("input[type='number']").inputSpinner()
     $(".buttons-only").inputSpinner({buttonsOnly: true})
