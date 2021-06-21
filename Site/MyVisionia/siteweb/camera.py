@@ -64,13 +64,14 @@ class CamVideoStreamTrack(VideoStreamTrack):
         self.counter = 0
         self.frames = []
         self.mode=mode
-
+        self.cptImages=0
+        self.moduloEcriture=50
     async def recv(self):
         ret, frame = cap.read()
         frame = arducam_utils.convert(frame)
+        print(self.mode)
 
-
-        if self.mode == 'display':
+        if self.mode == 'usual':
             cv2.imwrite('cam.jpg',frame)
             logging.debug('usual mode')
             img = cv2.imread('cam.jpg')
@@ -87,12 +88,12 @@ class CamVideoStreamTrack(VideoStreamTrack):
             frame.time_base = time_base
             self.counter += 1
 
-        if self.mode == 'getimages':
+        if self.mode == 'memory':
             logging.debug('getimages mode')
-            if ecriture%moduloEcriture == 0:
-                cv2.imwrite('../stockage/imagesAcquises' + ("{:0=6}".format(Cptimages)) + '.jpg', frame)
-                Cptimages += 1
-                img = cv2.imread('flash.jpg')
+            if (self.counter+1)%self.moduloEcriture == 0:
+                cv2.imwrite('../stockage/imagesAcquises' + ("{:0=6}".format(cptImages)) + '.jpg', frame)
+                cptImages += 1
+                img = cv2.imread('flash.png')
             else :
                 cv2.imwrite('cam.jpg', frame)
                 img = cv2.imread('cam.jpg')

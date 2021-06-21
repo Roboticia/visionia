@@ -30,11 +30,12 @@ async def on_shutdown(app):
     pcs.clear()
 
 
-async def offer(request, mode='param'):
+async def offer(request):
     params = await request.json()
     offer = RTCSessionDescription(sdp=params["sdp"], type=params["type"])
     pc = RTCPeerConnection()
     pcs.add(pc)
+    mode = params["mode"]
 
     @pc.on("connectionstatechange")
     async def on_connectionstatechange():
@@ -45,9 +46,14 @@ async def offer(request, mode='param'):
             pcs.discard(pc)
 
     await pc.setRemoteDescription(offer)
-    pc.addTrack(CamVideoStreamTrack())
-    if mode == 'memory':
-        CamVideoStreamTrack.mode = 'memory'
+
+    logging.info(str(mode))
+
+    if (mode == 'usual'):
+        pc.addTrack(CamVideoStreamTrack(mode='usual'))
+    if (mode == 'memory'):
+        pc.addTrack(CamVideoStreamTrack(mode='memory'))
+
 
     answer = await pc.createAnswer()
     await pc.setLocalDescription(answer)
