@@ -58,3 +58,15 @@ function start() {
         }
     });
     negotiate();
+
+    document.getElementById('start').style.display = 'none';
+}
+
+function stop() {
+    document.getElementById('stop').style.display = 'none';
+
+    // close peer connection
+    setTimeout(function() {
+        pc.close();
+    }, 500);
+}

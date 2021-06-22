@@ -1,5 +1,5 @@
 #Les chemins
-from views import accueil, index, javascript, offer, acquisition
+from views import accueil, index, javascriptacquisition, javascriptparam, offer, acquisition
 
 
 def setup_routes(app):
@@ -8,8 +8,8 @@ def setup_routes(app):
     app.router.add_static('/stockage', 'templates/LEdossier')
     app.router.add_get("/video", index)
     app.router.add_post('/video', index)
-    app.router.add_get("/client.param.js", javascript)
-    app.router.add_get("/client.acquisition.js", javascript)
+    app.router.add_get("/client.param.js", javascriptparam)
+    app.router.add_get("/client.acquisition.js", javascriptacquisition)
     app.router.add_post("/offer", offer)
 
 

@@ -65,19 +65,18 @@ class CamVideoStreamTrack(VideoStreamTrack):
         self.frames = []
         self.mode=mode
         self.cptImages=0
-        self.moduloEcriture=50
+        self.moduloEcriture=80
     async def recv(self):
         ret, frame = cap.read()
         frame = arducam_utils.convert(frame)
-        print(self.mode)
+
 
         if self.mode == 'usual':
             cv2.imwrite('cam.jpg',frame)
-            logging.debug('usual mode')
             img = cv2.imread('cam.jpg')
             if self.counter%(Freeram)==(0):
                 self.frames=[]
-                logging.debug('Liste vidée')
+                logging.debug('Liste videe')
             self.frames.append(VideoFrame.from_ndarray(numpy.array(img)))
             logging.debug('Frame dans la liste')
             pts, time_base = await self.next_timestamp()
@@ -89,21 +88,22 @@ class CamVideoStreamTrack(VideoStreamTrack):
             self.counter += 1
 
         if self.mode == 'memory':
-            logging.debug('getimages mode')
-            if (self.counter+1)%self.moduloEcriture == 0:
-                cv2.imwrite('../stockage/imagesAcquises' + ("{:0=6}".format(cptImages)) + '.jpg', frame)
-                cptImages += 1
-                img = cv2.imread('flash.png')
-            else :
+
+            if (self.counter-1)%self.moduloEcriture:
+                #cv2.imwrite('test.jpg', frame)
+                #img = cv2.imread('test.jpg')
+                a= 'images/'+("{:0=6}".format(self.cptImages)) + '.jpg'
+                print (a)
+                cv2.imwrite((a), frame)
+                img = cv2.imread(a)
+                self.cptImages+=1
+
+            else:
                 cv2.imwrite('cam.jpg', frame)
                 img = cv2.imread('cam.jpg')
-            Ecriture += 1
-
-
-
             if self.counter%(Freeram)==(0):
                 self.frames=[]
-                logging.debug('Liste vidée')
+                logging.debug('Liste videe')
             self.frames.append(VideoFrame.from_ndarray(numpy.array(img)))
             logging.debug('Frame dans la liste')
             pts, time_base = await self.next_timestamp()

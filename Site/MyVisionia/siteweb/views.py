@@ -36,6 +36,7 @@ async def offer(request):
     pc = RTCPeerConnection()
     pcs.add(pc)
     mode = params["mode"]
+    logging.info(str(mode)+ ' mode')
 
     @pc.on("connectionstatechange")
     async def on_connectionstatechange():
@@ -47,7 +48,7 @@ async def offer(request):
 
     await pc.setRemoteDescription(offer)
 
-    logging.info(str(mode))
+
 
     if (mode == 'usual'):
         pc.addTrack(CamVideoStreamTrack(mode='usual'))
@@ -102,6 +103,10 @@ async def index(request):
     return {'expo': Expo, 'lum': Lumino}
 
 
-async def javascript(request):
+async def javascriptparam(request):
     content = open("templates/client.param.js", "r").read()
+    return web.Response(content_type="application/javascript", text=content)
+
+async def javascriptacquisition(request):
+    content = open("templates/client.acquisition.js", "r").read()
     return web.Response(content_type="application/javascript", text=content)
