@@ -101,5 +101,4 @@ var $changedInput = $("#changedInput")
 
 $changedInput.on("change", function (event) {
     $valueOnChange.html($(event.target).val())
-
 })

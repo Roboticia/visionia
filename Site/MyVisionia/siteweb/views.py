@@ -6,6 +6,7 @@ from aiortc import RTCSessionDescription, RTCPeerConnection
 from camera import CamVideoStreamTrack
 import configparser
 import logging
+import asyncio
 
 logging.basicConfig(level=logging.INFO)
 
@@ -110,3 +111,13 @@ async def javascriptparam(request):
 async def javascriptacquisition(request):
     content = open("templates/client.acquisition.js", "r").read()
     return web.Response(content_type="application/javascript", text=content)
+
+@aiohttp_jinja2.template('memoire.html')
+async def memoire(request):
+    return {}
+
+async def handle_404(request):
+    return aiohttp_jinja2.render_template('erreur.html', request, {}, status=404)
+
+
+
