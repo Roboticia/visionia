@@ -11,8 +11,8 @@ from middlewares import setup_middlewares
 
 
 
-logging.basicConfig(level=logging.DEBUG)
-#print(logging.root.level)
+logging.basicConfig(level=logging.CRITICAL,filename="cam.log", filemode="a", format='%(asctime)s - %(levelname)s - %(message)s')
+
 ROOT = os.path.dirname(__file__)
 
 
