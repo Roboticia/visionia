@@ -18,7 +18,7 @@ from utils import ArducamUtils
 from aiohttp import web
 from aiortc.contrib.media import MediaPlayer
 
-logging.basicConfig(level=logging.CRITICAL)
+logging.basicConfig(level=logging.DEBUG,filename="cam.log", filemode="a", format='%(asctime)s - %(levelname)s - %(message)s')
 
 Expo=1000
 Lumino=50
@@ -72,30 +72,17 @@ class CamVideoStreamTrack(VideoStreamTrack):
         ret, frame = cap.read()
         logging.critical('%3f : Lecture de la frame OK', time.time() - start_time)
         frame = arducam_utils.convert(frame)
-        # img = frame
         logging.critical('%3f : Conversion arducam OK', time.time() - start_time)
 
-        if self.mode == 'usual':
-            img = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
-            logging.critical('%3f : Changement de numpy array', time.time() - start_time)
-
-        if self.mode == 'memory':
-
-            if (self.counter-1)%self.moduloEcriture:
+        if (self.mode == 'memory') & ((self.counter-1)%self.moduloEcriture):
                 a= 'images/'+("{:0=6}".format(self.cptImages)) + '.jpg'
                 logging.critical('image ecrite sous le nom : %s',a)
                 cv2.imwrite((a), frame)
                 logging.critical('%3f : Ecriture disque OK', time.time() - start_time)
-                img = cv2.imread(a)
-                logging.critical('%3f : Lecture disque OK', time.time() - start_time)
-                self.cptImages+=1
+                self.cptImages += 1
 
-            else:
-                cv2.imwrite('cam.jpg', frame)
-                logging.critical('%3f : Ecriture disque OK', time.time() - start_time)
-                img = cv2.imread('cam.jpg')
-                logging.critical('%3f : Lecture disque OK', time.time() - start_time)
-
+        img = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
+        logging.critical('%3f : Changement de numpy array OK', time.time() - start_time)
         self.frame = VideoFrame.from_ndarray(numpy.array(img))
         logging.critical('%3f : Transtypee et envoyee OK', time.time() - start_time)
         pts, time_base = await self.next_timestamp()

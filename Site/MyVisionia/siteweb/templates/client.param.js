@@ -41,6 +41,28 @@ function negotiate() {
     });
 }
 
+function changedata() {
+    //acquiert les datas
+    //push les datas
+    //restart
+    var config = {
+        sdpSemantics: 'unified-plan'
+    };
+
+    if (document.getElementById('use-stun').checked) {
+        config.iceServers = [{urls: ['stun:stun.l.google.com:19302']}];
+    }
+    pc = new RTCPeerConnection(config);
+
+    // connect audio / video
+    pc.addEventListener('track', function(evt) {
+        if (evt.track.kind == 'video') {
+            document.getElementById('video').srcObject = evt.streams[0];
+        }
+    });
+    negotiate();
+}
+
 function start() {
     var config = {
         sdpSemantics: 'unified-plan'
@@ -97,6 +119,7 @@ $(document).on('click', '.number-spinner button', function () {
 	}
 	btn.closest('.number-spinner').find('input').val(newVal);
 });
+
 var $changedInput = $("#changedInput")
 
 $changedInput.on("change", function (event) {

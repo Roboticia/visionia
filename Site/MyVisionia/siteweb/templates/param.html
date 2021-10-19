@@ -19,14 +19,13 @@
 <body>
 <div class="container-fluid entete">
    <div class="row">
-        <div class="col-6" >
-            <h4>&nbsp;</h4>
-            <h1>Paramètres</h1>
-        </div>
-        <div class="col-6 right">
+        <div class="col-3">
             <a href="/">
                 <img src="/stockage/contenu/logo.png" alt="Logo Menu" height="80">
             </a>
+        </div>
+       <div class="col-9" >
+            <h1 align="right">Paramètres</h1>
         </div>
    </div>
 </div>
@@ -58,13 +57,13 @@
             </div>
 
 
-                <form action="/video" method="post" >
-                    <input name="Expo" class="buttons-only"  value="{{ expo }}" min="8" max="200" style="display: none;">
-                    <h2 id="Tlum" style="display: none">Luminosité</h2>
-                    <h4 id="lum" style="display: none">{{ lum }} %</h4>
-                    <input name="Lumi" class="buttons-only"  value="{{ lum }}" min="8" max="200" style="display: none;">
-                    <button id="changedata" style="display: none;" type="submit" class="btn btn-secondary btn-lg">Change les données</button>
-                </form>
+            <form action="/video" method="post" >
+                <input name="Expo" class="buttons-only"  value="{{ expo }}" min="8" max="200" style="display: none;">
+                <h2 id="Tlum" style="display: none">Luminosité</h2>
+                <h4 id="lum" style="display: none">{{ lum }} %</h4>
+                <input name="Lumi" class="buttons-only"  value="{{ lum }}" min="8" max="200" style="display: none;">
+                <button id="changedata" style="display: none;" type="submit" class="btn btn-secondary btn-lg" onclick="changedata()">Changer les données</button>
+            </form>
 
 
 
@@ -83,10 +82,7 @@
                 <label for="use-stun">Problème d'affichage vidéo ? Cochez cette case</label>
             </div>
         </div>
-        <div>
-            <label for="say">Quelle salutation voulez-vous dire ?</label>
-            <input name="say" id="say" value="Salut">
-        </div>
+
     </div>
 </div>
 
@@ -95,6 +91,7 @@
 
 
 <script src="client.param.js"></script>
+
 <script>
     $("input[type='number']").inputSpinner()
     $(".buttons-only").inputSpinner({buttonsOnly: true})
