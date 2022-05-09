@@ -49,8 +49,6 @@ async def offer(request):
 
     await pc.setRemoteDescription(offer)
 
-
-
     if (mode == 'usual'):
         pc.addTrack(CamVideoStreamTrack(mode='usual'))
     if (mode == 'memory'):
@@ -67,20 +65,31 @@ async def offer(request):
         ),
     )
 
-
 @aiohttp_jinja2.template('param.html')
 async def index(request):
     from camera import Expo, Lumino, allumage
 
+    print("lumino : ", Lumino)
+
+
     if request.method == 'POST':
+        #recupere contenu
         contenu = await request.post()
+
+        print("expo : ", contenu.getone("addexpo"))
+        print("luminosité : ", contenu.getone("luminosite"))
+
+        Lumino = contenu.getone("luminosite")
+
+
         logging.info("POST = " + str(contenu))
 
         with open('sauvegarde.json', 'r') as json_file:
             data = json.load(json_file)
         print(data['courant'])
+
         for p in data['courant']:
-            p['exposition'] = contenu.getone("Expo", Expo)
+            p['exposition'] = contenu.getone("addexpo", Expo)
             p['lumiere'] = contenu.getone("Lumi", Lumino)
             print(p['exposition'])
             print("lumiere" + str(p['lumiere']))

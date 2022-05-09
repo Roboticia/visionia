@@ -20,7 +20,7 @@ from aiortc.contrib.media import MediaPlayer
 
 logging.basicConfig(level=logging.CRITICAL)
 
-Expo=1000
+Expo=100
 Lumino=50
 Freeram=50
 
@@ -60,13 +60,17 @@ class CamVideoStreamTrack(VideoStreamTrack):
 
 
     def __init__(self,mode='display'):
+
         super().__init__()  # don't forget this!
         self.counter = 0
         self.frame = VideoFrame
         self.mode=mode
         self.cptImages=0
         self.moduloEcriture=Freeram
+
+    # traitement opencv
     async def recv(self):
+
         start_time=time.time() #uniquement pour les loggers
         logging.critical('%3f : Debut de cycle',time.time() - start_time)
         ret, frame = cap.read()
@@ -77,6 +81,7 @@ class CamVideoStreamTrack(VideoStreamTrack):
 
         if self.mode == 'usual':
             img = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
+            #img = cv2.line(img, (0, 0), (150, 150), (255, 0, 0), 10)
             logging.critical('%3f : Changement de numpy array', time.time() - start_time)
 
         if self.mode == 'memory':

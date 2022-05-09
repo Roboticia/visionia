@@ -13,14 +13,12 @@
 
 </head>
 
-
-
-
 <body>
 <div class="container-fluid entete">
    <div class="row">
         <div class="col-6" >
             <h4>&nbsp;</h4>
+
             <h1>Paramètres</h1>
         </div>
         <div class="col-6 right">
@@ -49,6 +47,8 @@
                     <button id="start"  class="btn btn-secondary btn-lg" onclick="start()">Lancer la caméra</button>
 
                     <button id="stop" style="display: none" onclick="stop()">Stop</button>
+
+
                 </div>
 
                 <div class="col-4 centre">
@@ -63,14 +63,21 @@
                     <h2 id="Tlum" style="display: none">Luminosité</h2>
                     <h4 id="lum" style="display: none">{{ lum }} %</h4>
                     <input name="Lumi" class="buttons-only"  value="{{ lum }}" min="8" max="200" style="display: none;">
+
                     <button id="changedata" style="display: none;" type="submit" class="btn btn-secondary btn-lg">Change les données</button>
                 </form>
 
+                    <form action="/video" method="post">
 
+                        <label for="expo">choisir la valeur de l'exposition : </label><br>
+                        <input type="expo" id="expo" name="addexpo"><br>
 
+                        <label for="luminosite">choisir la valeur de la luminosité : </label><br>
+                        <input type="luminosite" id="luminosite" name="luminosite"><br>
 
+                        <input type="submit" value="Submit">
 
-
+                    </form>
 
             <div class="row">
 
@@ -86,7 +93,11 @@
         <div>
             <label for="say">Quelle salutation voulez-vous dire ?</label>
             <input name="say" id="say" value="Salut">
+
+
+
         </div>
+
     </div>
 </div>
 
@@ -98,6 +109,7 @@
 <script>
     $("input[type='number']").inputSpinner()
     $(".buttons-only").inputSpinner({buttonsOnly: true})
+
 </script>
 
 

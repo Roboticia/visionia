@@ -81,6 +81,14 @@ function stop() {
     }, 500);
 }
 
+
+function changeExpo() {
+
+    var input = document.getElementById("expo").value;
+    console.log(input);
+
+}
+
 $(document).on('click', '.number-spinner button', function () {
 	var btn = $(this),
 		oldValue = btn.closest('.number-spinner').find('input').val().trim(),
