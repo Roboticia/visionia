@@ -7,7 +7,7 @@ Factory camera
 https://www.arducam.com/docs/camera-for-jetson-nano/mipi-camera-modules-for-jetson-nano/driver-installation/
   
 ```sh
-wget https://github.com/ArduCAM/MIPI_Camera/releases/download/v0.0.2/install.sh
+wget https://github.com/ArduCAM/MIPI_Camera/releases/download/v0.0.3/install_full.sh
 chmod +x install.sh
 ./install.sh
 ```  
