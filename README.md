@@ -8,8 +8,8 @@ https://www.arducam.com/docs/camera-for-jetson-nano/mipi-camera-modules-for-jets
   
 ```sh
 wget https://github.com/ArduCAM/MIPI_Camera/releases/download/v0.0.3/install_full.sh
-chmod +x install.sh
-./install.sh
+chmod +x install_full.sh
+./install_full.sh -m arducam
 ```  
   
   
