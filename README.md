@@ -50,7 +50,7 @@ docker run -it --device /dev/video0:/dev/video0  --name visionia --runtime nvidi
   pip install aiortc
   pip install aiohttp
   pip install aiohttp-jinja2
-  pip install v4l2
+  pip install v4l2-fix
   apt-get install v4l-utils -y
 ```
 <p>
