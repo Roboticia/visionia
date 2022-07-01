@@ -1,4 +1,5 @@
 import darknet
+import darknet.py
 
 def image_detection(image_or_path, network, class_names, class_colors, thresh):
     # Darknet doesn't accept numpy images.
