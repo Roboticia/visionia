@@ -1,5 +1,5 @@
 import darknet
-import darknet.py
+import darknet.py from /NNvision/visionia/Site/MyVisionia/siteweb/darknet
 
 def image_detection(image_or_path, network, class_names, class_colors, thresh):
     # Darknet doesn't accept numpy images.
