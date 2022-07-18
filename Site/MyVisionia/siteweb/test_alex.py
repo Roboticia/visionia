@@ -1,22 +1,6 @@
 import darknet.darknet as dn
 import cv2 as cv2
-
-def prepare_batch(images, network, channels=3):
-    width = dn.network_width(network)
-    height = dn.network_height(network)
-
-    darknet_images = []
-    for image in images:
-        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        image_resized = cv2.resize(image_rgb, (width, height),
-                                   interpolation=cv2.INTER_LINEAR)
-        custom_image = image_resized.transpose(2, 0, 1)
-        darknet_images.append(custom_image)
-
-    batch_array = np.concatenate(darknet_images, axis=0)
-    batch_array = np.ascontiguousarray(batch_array.flat, dtype=np.float32)/255.0
-    darknet_images = batch_array.ctypes.data_as(darknet.POINTER(darknet.c_float))
-    return darknet.IMAGE(width, height, channels, darknet_images)
+import faulthandler
 
 def image_detection(image_or_path, network, class_names, class_colors, thresh):
     # Darknet doesn't accept numpy images.
@@ -59,8 +43,9 @@ def load_network(config_file, data_file, weights, batch_size=1):
     colors = dn.class_colors(class_names)
     return network, class_names, colors
 
+faulthandler.enable()
 #test_img = prepare_batch("/NNvision/darknet/data/dog.jpg","/NNvision/darknet/cfg/yolov4-tiny.cfg",channels=3)
 img = cv2.imread("/NNvision/darknet/data/dog.jpg")
 
-network, classNames, classColors = dn.load_network("/NNvision/darknet/cfg/yolov4-tiny.cfg", "/NNvision/darknet/cfg/coco.data", "/NNvision/darknet/tiny.weights")
-image_detection(img, "/NNvision/darknet/cfg/yolov4-tiny.cfg", classNames, classColors, 0.2)
+network, classNames, classColors = dn.load_network("/NNvision/darknet/cfg/yolov4-tiny.cfg", "/NNvision/darknet/cfg/coco.data", "/NNvision/darknet/yolov4-tiny.weights")
+image_detection(img, network, classNames, classColors, 0.2)
