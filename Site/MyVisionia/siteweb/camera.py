@@ -8,12 +8,15 @@ import math
 import cv2
 import numpy
 import subprocess
+import settings
 import time
 import configparser
 
 
 import logging
 from av import VideoFrame
+
+from Site.MyVisionia.siteweb.darknet.darknet_image import *
 from utils import ArducamUtils
 from aiohttp import web
 from aiortc.contrib.media import MediaPlayer
@@ -34,7 +37,18 @@ with open('sauvegarde.json') as json_file:
 
 cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
 arducam_utils = ArducamUtils(0)
+for key, values in settings.DARKNET_CONF.items():
+    weights = values['WEIGHT_PATH']
+    config_file = values['CFG']
+    data_file = values['DATA']
+    batch_size = values['BATCH']
 
+network, class_names, class_colors = darknet.load_network(
+        config_file,
+        data_file,
+        weights,
+        batch_size
+    )
 
 
 def allumage(Expo):
@@ -76,6 +90,8 @@ class CamVideoStreamTrack(VideoStreamTrack):
         ret, frame = cap.read()
         logging.critical('%3f : Lecture de la frame OK', time.time() - start_time)
         frame = arducam_utils.convert(frame)
+        frame, _ = image_detection(frame, network, class_names, class_colors, thresh=0.3)
+
         # img = frame
         logging.critical('%3f : Conversion arducam OK', time.time() - start_time)
 
