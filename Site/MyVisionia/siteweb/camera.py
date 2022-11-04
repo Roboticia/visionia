@@ -42,6 +42,10 @@ for key, values in settings.DARKNET_CONF.items():
     config_file = values['CFG']
     data_file = values['DATA']
     batch_size = values['BATCH']
+    width = values['WIDTH']
+    height = values['HEIGHT']
+
+    'HEIGHT': 416,
 
 network, class_names, class_colors = darknet.load_network(
         config_file,
@@ -88,9 +92,17 @@ class CamVideoStreamTrack(VideoStreamTrack):
         start_time=time.time() #uniquement pour les loggers
         logging.critical('%3f : Debut de cycle',time.time() - start_time)
         ret, frame = cap.read()
-        logging.critical('%3f : Lecture de la frame OK', time.time() - start_time)
         frame = arducam_utils.convert(frame)
-        frame, _ = image_detection(frame, network, class_names, class_colors, thresh=0.3)
+
+        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frame_resized = cv2.resize(frame_rgb, (width, height),
+                                   interpolation=cv2.INTER_LINEAR)
+        img_for_detect = darknet.make_image(width, height, 3)
+        darknet.copy_image_from_bytes(img_for_detect, frame_resized.tobytes())
+        #print(type(frame))
+        logging.critical('%3f : Lecture de la frame OK', time.time() - start_time)
+#        frame = arducam_utils.convert(frame)
+        frame, _ = image_detection(img_for_detect, network, class_names, class_colors, thresh=0.3)
 
         # img = frame
         logging.critical('%3f : Conversion arducam OK', time.time() - start_time)
